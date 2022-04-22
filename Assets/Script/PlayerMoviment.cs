@@ -22,6 +22,7 @@ public class PlayerMoviment : MonoBehaviour
     public int dadoTeste;
     
 
+//Teste de commit Primeiro
     
 
     private void Start()
@@ -66,7 +67,7 @@ public class PlayerMoviment : MonoBehaviour
 
     }
 
-    //Botão de jogar dado
+    //Botï¿½o de jogar dado
     public void jogarDado()
     {
         StartCoroutine(MoviDuration()); 

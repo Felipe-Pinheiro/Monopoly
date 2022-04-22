@@ -6,16 +6,25 @@ using TMPro;
 
 public class ControlaGame : MonoBehaviour
 {
-    [Header("Configs")]
+    [Header("Cartas")]
     [SerializeField] private GameObject cartaMarrom;
+    [SerializeField] private GameObject cartaAzulC;
+    [SerializeField] private GameObject cartaRosa;
+    [SerializeField] private GameObject cartaLaranja;
+    [SerializeField] private GameObject cartaVermelho;
+    [SerializeField] private GameObject cartaAmarelo;
+    [SerializeField] private GameObject cartaVerde;
+    [SerializeField] private GameObject cartaAzul;
+
+    [Header("Configs")]
     [SerializeField] private Button bt_Comprar;
     [SerializeField] private Button bt_Fechar;
     [SerializeField] private Button bt_Dado;
     [SerializeField] private Image img_Player1;
     [SerializeField] private Image img_Player2;
 
-    [Header("Material de confirmção de compras ")]
-    [SerializeField] private Material mt_ConfPl1;
+    //[Header("Material de confirmção de compras ")]
+    //[SerializeField] private Material mt_ConfPl1;
 
     [Header("Prefabs ")]
     [SerializeField] private GameObject ConfPl1;
@@ -24,9 +33,54 @@ public class ControlaGame : MonoBehaviour
     [Header("Casas")]
     public Vector3[] casas = new Vector3[40];
 
+
+    //TROCAR POR UMA ARRAY COM TODOS INTS 
     [Header("Pode Comprar Cartas Marrons ")]
     private int podeComprarCartaMarrom01 = 0;
     private int podeComprarCartaMarrom02 = 0;
+    
+    //TROCAR POR UMA ARRAY COM TODOS INTS 
+    [Header("Pode Comprar Cartas Azul Claro ")]
+    private int podeComprarCartaAzulC01 = 0;
+    private int podeComprarCartaAzulC02 = 0;
+    private int podeComprarCartaAzulC03 = 0;
+
+    //TROCAR POR UMA ARRAY COM TODOS INTS 
+    [Header("Pode Comprar Cartas Rosa ")]
+    private int podeComprarCartaRosa01= 0;
+    private int podeComprarCartaRosa02= 0;
+    private int podeComprarCartaRosa03= 0;
+
+    //TROCAR POR UMA ARRAY COM TODOS INTS 
+    [Header("Pode Comprar Cartas Laranja ")]
+    private int podeComprarCartaLaranja01= 0;
+    private int podeComprarCartaLaranja02= 0;
+    private int podeComprarCartaLaranja03= 0;
+
+    //TROCAR POR UMA ARRAY COM TODOS INTS 
+    [Header("Pode Comprar Cartas Vermelho ")]
+    private int podeComprarCartaVermelho01 = 0;
+    private int podeComprarCartaVermelho02 = 0;
+    private int podeComprarCartaVermelho03 = 0;
+
+    //TROCAR POR UMA ARRAY COM TODOS INTS 
+    [Header("Pode Comprar Cartas Amarelo ")]
+    private int podeComprarCartaAmrelo01= 0;
+    private int podeComprarCartaAmrelo02= 0;
+    private int podeComprarCartaAmrelo03= 0;
+
+    //TROCAR POR UMA ARRAY COM TODOS INTS 
+    [Header("Pode Comprar Cartas Verde ")]
+    private int podeComprarCartaVerde01 = 0;
+    private int podeComprarCartaVerde02 = 0;
+    private int podeComprarCartaVerde03 = 0;
+
+    //TROCAR POR UMA ARRAY COM TODOS INTS 
+    [Header("Pode Comprar Cartas Amarelo ")]
+    private int podeComprarCartaAzul01 = 0;
+    private int podeComprarCartaAzul02 = 0;
+    
+
 
     [Header("Controlador de dado")]
     private int controlaDado = 1;
@@ -73,6 +127,35 @@ public class ControlaGame : MonoBehaviour
 
             //print("entrou antes");
         }
+        else if (nCasa == 6 || nCasa == 8 || nCasa == 9)
+        {
+            CartaAzulClaro();
+        }
+        else if (nCasa == 11 || nCasa == 13 || nCasa == 14)
+        {
+            CartaRosa();
+        }
+        else if (nCasa == 16 || nCasa == 18 || nCasa == 19)
+        {
+            CartaLaranja();
+        }
+        else if (nCasa == 21 || nCasa == 23 || nCasa == 24)
+        {
+            CartaVermelho();
+        }
+        else if (nCasa == 26 || nCasa == 27 || nCasa == 29)
+        {
+            CartaAmarelo();
+        }
+        else if (nCasa == 31 || nCasa == 32 || nCasa == 34)
+        {
+            CartaVerde();
+        }
+        else if (nCasa == 37 || nCasa == 39 )
+        {
+            CartaAzul();
+        }
+
         else
         {
             bt_Dado.gameObject.SetActive(true);
@@ -81,7 +164,7 @@ public class ControlaGame : MonoBehaviour
         }
     }
 
-    public void CartaMarrom()
+    private void CartaMarrom()
     {
 
         bt_Dado.gameObject.SetActive(false); 
@@ -90,28 +173,14 @@ public class ControlaGame : MonoBehaviour
         {
             if (podeComprarCartaMarrom01 == 0)
             {
-                cartaMarrom.SetActive(true);
-                bt_Comprar.gameObject.SetActive(true);
-                bt_Fechar.gameObject.SetActive(true);
+                //lIGA A HUD    
+                LigaAHudDeCompra(cartaMarrom);
 
-
-                switch (nPlayer){
-                    case 1:
-                        bt_Comprar.onClick.RemoveAllListeners();
-                        bt_Comprar.onClick.AddListener(() => Comprar(cartaMarrom, 500, Player1 , 1 , ConfPl1));
-                        break;
-
-
-                    case 2:
-                        bt_Comprar.onClick.RemoveAllListeners();
-                        bt_Comprar.onClick.AddListener(() => Comprar(cartaMarrom, 500, Player2 , 1 , ConfPl2));
-                        break;
-
-
-                }
-               
-               
+                //configura os botões 
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaMarrom, 101, nPlayer , 1 , 50));
                 bt_Fechar.onClick.AddListener(() => Fechar(cartaMarrom));
+
             }
             else
             {
@@ -124,25 +193,12 @@ public class ControlaGame : MonoBehaviour
         {
             if (podeComprarCartaMarrom02 == 0)
             {
-                cartaMarrom.SetActive(true);
-                bt_Comprar.gameObject.SetActive(true);
-                bt_Fechar.gameObject.SetActive(true);
+                LigaAHudDeCompra(cartaMarrom);
 
 
-                switch (nPlayer)
-                {
-                    case 1:
-                        bt_Comprar.onClick.RemoveAllListeners();
-                        bt_Comprar.onClick.AddListener(() => Comprar(cartaMarrom, 800, Player1, 2, ConfPl1));
-                        break;
 
-
-                    case 2:
-                        bt_Comprar.onClick.RemoveAllListeners();
-                        bt_Comprar.onClick.AddListener(() => Comprar(cartaMarrom, 800, Player2, 2, ConfPl2));
-                        break;
-                }
-
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaMarrom, 102, nPlayer, 2 , 100));
                 bt_Fechar.onClick.AddListener(() => Fechar(cartaMarrom));
             }
             else
@@ -154,40 +210,609 @@ public class ControlaGame : MonoBehaviour
                
     }
 
+    private void CartaAzulClaro()
+    {
+        //print("entrou na azul claro");
+        //bt_Dado.gameObject.SetActive(true);
+        //ControlaHudPlayer();
 
-    
+
+        if (nCasa == 6)
+        {
+            if (podeComprarCartaAzulC01 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaAzulC);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaAzulC, 201, nPlayer, 3, 200));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaAzulC));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaAzulC01);
+            }
 
 
+        } 
+        else if (nCasa == 8)
+        {
+            if (podeComprarCartaAzulC02 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaAzulC);
 
-    void Comprar(GameObject Carta, int preco , PlayerMoviment qualPlayer , int qualCarta,GameObject confirm )
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaAzulC, 202, nPlayer, 4, 200));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaAzulC));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaAzulC02);
+            }
+
+        }
+        else if (nCasa == 9)
+        {
+            if (podeComprarCartaAzulC03 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaAzulC);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaAzulC, 203, nPlayer, 5, 200));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaAzulC));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaAzulC03);
+            }
+
+        }
+
+
+    }
+
+    private void CartaRosa()
+    {
+        if (nCasa == 11)
+        {
+            if (podeComprarCartaRosa01 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaRosa);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaRosa, 301, nPlayer, 6, 300));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaRosa));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaRosa01);
+            }
+
+
+        }
+        else if (nCasa == 13)
+        {
+            if (podeComprarCartaRosa02 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaRosa);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaRosa, 302, nPlayer, 7, 300));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaRosa));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaRosa02);
+            }
+
+        }
+        else if (nCasa == 14)
+        {
+            if (podeComprarCartaRosa03 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaRosa);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaRosa, 303, nPlayer, 8, 300));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaRosa));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaRosa03);
+            }
+
+        }
+
+    }
+
+    private void CartaLaranja()
+    {
+
+        if (nCasa == 16)
+        {
+            if (podeComprarCartaLaranja01 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaLaranja);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaLaranja, 401, nPlayer, 9, 400));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaLaranja));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaLaranja01);
+            }
+
+
+        }
+        else if (nCasa == 18)
+        {
+            if (podeComprarCartaLaranja02 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaLaranja);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaLaranja, 402, nPlayer, 10, 400));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaLaranja));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaLaranja02);
+            }
+
+        }
+        else if (nCasa == 19)
+        {
+            if (podeComprarCartaLaranja03 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaLaranja);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaLaranja, 403, nPlayer, 11 , 400));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaLaranja));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaLaranja03);
+            }
+
+        }
+    }
+
+    private void CartaVermelho()
+    {
+
+        if (nCasa == 21)
+        {
+            if (podeComprarCartaVermelho01 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaVermelho);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaVermelho, 501, nPlayer, 12, 500));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaVermelho));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaVermelho01);
+            }
+
+
+        }
+        else if (nCasa == 23)
+        {
+            if (podeComprarCartaVermelho02 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaVermelho);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaVermelho, 502, nPlayer, 13, 500));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaVermelho));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaVermelho02);
+            }
+
+        }
+        else if (nCasa == 24)
+        {
+            if (podeComprarCartaVermelho03 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaVermelho);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaVermelho, 503, nPlayer, 14, 500));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaVermelho));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaVermelho03);
+            }
+
+        }
+    }
+
+    private void CartaAmarelo()
+    {
+        if (nCasa == 26)
+        {
+            if (podeComprarCartaAmrelo01 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaAmarelo);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaAmarelo, 601, nPlayer, 15, 600));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaAmarelo));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaAmrelo01);
+            }
+
+
+        }
+        else if (nCasa == 27)
+        {
+            if (podeComprarCartaAmrelo02 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaAmarelo);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaAmarelo, 602, nPlayer, 16, 600));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaAmarelo));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaAmrelo02);
+            }
+
+        }
+        else if (nCasa == 29)
+        {
+            if (podeComprarCartaAmrelo03 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaAmarelo);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaAmarelo, 603, nPlayer, 17, 600));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaAmarelo));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaAmrelo03);
+            }
+
+        }
+    }
+
+    private void CartaVerde()
+    {
+        if (nCasa == 31)
+        {
+            if (podeComprarCartaVerde01 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaVerde);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaVerde, 701, nPlayer, 18, 700));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaVerde));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaVerde01);
+            }
+
+
+        }
+        else if (nCasa == 32)
+        {
+            if (podeComprarCartaVerde02 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaVerde);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaVerde, 702, nPlayer, 19, 700));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaVerde));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaVerde02);
+            }
+
+        }
+        else if (nCasa == 34)
+        {
+            if (podeComprarCartaVerde03 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaVerde);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaVerde, 703, nPlayer, 20, 700));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaVerde));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaVerde03);
+            }
+
+        }
+    }
+
+    private void CartaAzul()
+    {
+        if (nCasa == 37)
+        {
+            if (podeComprarCartaAzul01 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaAzul);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaAzul, 801, nPlayer, 21, 800));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaAzul));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaAzul01);
+            }
+
+
+        }
+        else if (nCasa == 39)
+        {
+            if (podeComprarCartaAzul02 == 0)
+            {
+                //Liga a Hud
+                LigaAHudDeCompra(cartaAzul);
+
+                //configura botões
+                bt_Comprar.onClick.RemoveAllListeners();
+                bt_Comprar.onClick.AddListener(() => Comprar(cartaAzul, 802, nPlayer, 22, 800));
+                bt_Fechar.onClick.AddListener(() => Fechar(cartaAzul));
+
+            }
+            else
+            {
+                Pagar(podeComprarCartaAzul02);
+            }
+
+        }
+        
+
+    }
+
+
+    private void LigaAHudDeCompra(GameObject carta)
+    {
+        carta.SetActive(true);
+        bt_Comprar.gameObject.SetActive(true);
+        bt_Fechar.gameObject.SetActive(true);
+
+    }
+
+    //PlayerMoviment
+
+
+    void Comprar(GameObject Carta, int preco , int qualPlayer , int qualCarta, int custo)
     {
         
         bt_Comprar.gameObject.SetActive(false);
         bt_Fechar.gameObject.SetActive(false);
         bt_Dado.gameObject.SetActive(true);
         Carta.SetActive(false);
+        GameObject confirm ;
 
 
+        //print(qualPlayer);
 
+        if (qualPlayer == 1)
+        {
+            Player1.moeda -= preco;
+            confirm = ConfPl1;
+        }
+        else if (qualPlayer == 2)
+        {
+            Player2.moeda -= preco;
+            confirm = ConfPl2;
+        }
+        else
+        {
+            confirm = ConfPl1;
 
-        qualPlayer.moeda -= preco;
+        }
+
+        //qualPlayer.moeda -= preco;
 
         switch (qualCarta)
         {
+                //azul marrom
             case 1:
-                podeComprarCartaMarrom01 = (nPlayer*10000) + 50 ;
+                podeComprarCartaMarrom01 = (nPlayer * 10000) + custo;
                 Instantiate(confirm, new Vector3(6.667f, 0.122f, -14.645f), Quaternion.identity);
-
-
-
+                
                 break;
 
             case 2:
-                podeComprarCartaMarrom02 = (nPlayer * 10000) + 100;
+                podeComprarCartaMarrom02 = (nPlayer * 10000) + custo;
                 Instantiate(confirm, new Vector3(5.036f, 0.122f, -14.645f), Quaternion.identity);
 
                 break;
+                //azul Claro
+            case 3:
+                podeComprarCartaAzulC01 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(2.557f, 0.122f, -14.645f), Quaternion.identity);
 
+                break;
+            case 4:
+                podeComprarCartaAzulC02 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(0.924f, 0.122f, -14.645f), Quaternion.identity);
+
+                break;
+            case 5:
+                podeComprarCartaAzulC03 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(0.122f, 0.122f, -14.645f), Quaternion.identity);
+
+                break;
+                //rosa
+            case 6:
+                podeComprarCartaRosa01 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(-1.64f, 0.122f, -12.81f), Quaternion.identity);
+
+                break;
+            case 7:
+                podeComprarCartaRosa02 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(-1.64f, 0.122f, -11.131f), Quaternion.identity);
+
+                break;
+            case 8:
+                podeComprarCartaRosa03= (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(-1.64f, 0.122f, -10.314f), Quaternion.identity);
+
+                break;
+
+                //Laranja
+            case 9:
+                podeComprarCartaLaranja01 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(-1.64f, 0.122f, -8.667f), Quaternion.identity);
+
+                break;
+            case 10:
+                podeComprarCartaLaranja02 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(-1.64f, 0.122f, -7.032f), Quaternion.identity);
+
+                break;
+            case 11:
+                podeComprarCartaLaranja03 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(-1.64f, 0.122f, -6.219f), Quaternion.identity);
+
+                break;
+
+            //Vermelho 
+            case 12:
+                podeComprarCartaVermelho01 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(0.119f, 0.122f, -4.49f), Quaternion.identity);
+
+                break;
+            case 13:
+                podeComprarCartaVermelho02 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(1.737f, 0.122f, -4.49f), Quaternion.identity);
+
+                break;
+            case 14:
+                podeComprarCartaVermelho03 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(2.556f, 0.122f, -4.49f), Quaternion.identity);
+
+                break;
+
+            //Amarelo
+            case 15:
+               podeComprarCartaAmrelo01  = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(4.212f, 0.122f, -4.49f), Quaternion.identity);
+
+                break;
+            case 16:
+                podeComprarCartaAmrelo02 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(5.031f, 0.122f, -4.49f), Quaternion.identity);
+
+                break;
+            case 17:
+                podeComprarCartaAmrelo03 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(6.665f, 0.122f, -4.49f), Quaternion.identity);
+
+                break;
+
+            //Verde
+            case 18:
+                podeComprarCartaVerde01= (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(8.363f, 0.122f, -6.178f), Quaternion.identity);
+
+                break;
+            case 19:
+                podeComprarCartaVerde02= (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(8.363f, 0.122f, -7.033f), Quaternion.identity);
+
+                break;
+            case 20:
+                podeComprarCartaVerde03 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(8.363f, 0.122f, -8.669f), Quaternion.identity);
+
+                break;
+
+
+            //Azul 
+            case 21:
+                podeComprarCartaAzul01= (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(8.363f, 0.122f, -11.124f), Quaternion.identity);
+
+                break;
+            case 22:
+                podeComprarCartaAzul02 = (nPlayer * 10000) + custo;
+                Instantiate(confirm, new Vector3(8.363f, 0.122f, -12.761f), Quaternion.identity);
+
+                break;
+           
+
+            default:
+
+                print("entrou na Default");
+
+                break;
 
         }
 
@@ -195,6 +820,11 @@ public class ControlaGame : MonoBehaviour
         ControlaHudPlayer();
 
     }
+
+    //private void ColocarConfirm(int podeComprar , Vector3 lugar)
+    //{
+        
+    //}
 
 
     private void Pagar(int qualCasa)
