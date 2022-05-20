@@ -7,14 +7,16 @@ public class PlayerMoviment : MonoBehaviour
 
     public int moeda = 1000;
 
+    public int preso = 0;
     
-    private int casaAtual = 0;
+    public int casaAtual = 0;
     private int dado= 0 ;
     public ControlaGame ControlaGame;
 
 
     [SerializeField]
-    private float tempoMovi = 5, tempoEspera = 1;
+
+    private float tempoMovi = 0.3f, tempoEspera = 0.5f;
 
     [SerializeField]
     private int playerInt;
@@ -84,13 +86,14 @@ public class PlayerMoviment : MonoBehaviour
         }
 
         //print(dado);
-        ControlaGame.trocaTexto("dado", dado);
+        ControlaGame.trocaTextoDado("dado", dado);
         
         for (int i = 0; i < dado; i++)
         {
             if (casaAtual == 39)
             {
                 casaAtual = -1;
+                moeda += 1000;
             }
 
             StartCoroutine(MoviLerp(ControlaGame.casas[casaAtual + 1], tempoMovi));
